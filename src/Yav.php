@@ -10,6 +10,9 @@ class Yav
         $this->sets = $sets;
     }
 
+    /**
+     * @throws YavException
+     */
     public function verify(array $data): void
     {
         if ($this->sets) {
@@ -19,7 +22,7 @@ class Yav
                     $obj->verify($data, $item);
                 }
             } catch (YavException $e) {
-
+                throw new YavException($e->getMessage(), $e->getCode());
             }
         }
     }
